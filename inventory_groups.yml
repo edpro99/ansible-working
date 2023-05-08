@@ -1,0 +1,12 @@
+all:
+  children:
+    linux:
+      hosts:
+        ansible_controller:
+          ansible_host: 54.67.94.48
+    windows:
+      children:
+         webservers:
+            hosts:
+              windows_server1:
+                ansible_host: 54.67.103.75
