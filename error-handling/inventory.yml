@@ -1,7 +1,7 @@
 windows:
   hosts:
     webserver1:
-      ansible_host: <IP or hostname of the Windows server>
+      ansible_host: 54.67.94.48
   vars:
     ansible_connection: winrm
     ansible_winrm_transport: ntlm
