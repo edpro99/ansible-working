@@ -1,0 +1,26 @@
+---
+- name: Ensure IIS is installed and started 
+  hosts: webservers
+  become: yes 
+  become_user: Administrator
+  vars_files:
+    - vault/secrets.yml
+    - vault/win_connect.yml
+  tasks:
+    - name: Ensure IIS Server is present 
+      win_feature:
+        name:  Web-Server
+        state: present
+        restart: no
+        include_sub_features: yes
+        include_management_tools: yes  
+    - name: Ensure latest web files are present
+      win_copy:
+        src: playbook-fun/files/
+        dest: c:\inetpub\wwwroot\
+        force: yes
+    - name: Configure website
+      win_template:
+        src: templates/web.config.j2
+        dest: C:\inetpub\wwwroot\web.config
+      become: true
