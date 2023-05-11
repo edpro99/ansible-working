@@ -39,6 +39,9 @@ def main():
             "type": 'str'
         },
     }
+	
+module = AnsibleModule(argument_spec=fields)
+    module.exit_json(changed=False, meta=module.params)
 
 	if __name__ == '__main__':
 		    main()
