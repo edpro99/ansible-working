@@ -10,7 +10,7 @@ def main():
 
 - name: Create a github Repo
       github_repo:
-        github_auth_key: "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"
+        github_auth_key: "..."
         username: "edpro99"
         name: "Hello-World"
         description: "This is your first repository"
@@ -39,7 +39,7 @@ def main():
             "type": 'str'
         },
     }
-	
+
 module = AnsibleModule(argument_spec=fields)
     module.exit_json(changed=False, meta=module.params)
 
