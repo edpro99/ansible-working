@@ -1,0 +1,24 @@
+- name: Create Windows group and user
+  hosts: webservers
+  become: yes
+  become_method: runas
+  become_user: Administrator
+  tasks:
+    - name: Create Remote Admins group
+      win_group:
+        name: Remote Admins
+        state: present
+
+    - name: Grant Remote Desktop permissions to Remote Admins group
+      win_acl:
+        path: 'hklm:\system\currentcontrolset\control\terminal server'
+        user: 'Remote Admins'
+        rights: 'FullControl'
+        type: allow
+
+    - name: Create user Bob and add to Remote Admins group
+      win_user:
+        name: Bob
+        password: 'P@ssw0rd'
+        groups: 'Remote Admins'
+        state: present
